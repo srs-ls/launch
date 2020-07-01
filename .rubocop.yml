@@ -1,0 +1,4 @@
+AllCops:
+  NewCops: disable
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
