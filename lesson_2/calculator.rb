@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
+require "yaml"
+
 def prompt(message)
-  puts("=> #{message}")
+  prompts = YAML.safe_load(File.read("messages.yml"))
+
+  if message.is_a? Symbol
+    prompt_message = prompts.find { |p| p[message] }[message]
+  else
+    prompt_message = message
+  end
+
+  puts("=> #{prompt_message}")
 end
 
 def operator_valid?(operator)
@@ -17,18 +27,18 @@ def operation_to_message(operator)
     "1" => "Adding",
     "2" => "Multiply",
     "3" => "Subtract",
-    "4" => "Dividing",
+    "4" => "Dividing"
   }[operator]
 end
 
-puts prompt("Welcome to the Calculator! Enter your name:")
+puts prompt(:welcome)
 
 name = ""
 loop do
   name = gets.chomp
 
   if name.empty?
-    prompt("Make sure you use a valid name.")
+    prompt(:valid_name)
   else
     break
   end
