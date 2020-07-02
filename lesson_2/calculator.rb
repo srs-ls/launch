@@ -4,6 +4,10 @@ require "yaml"
 
 MESSAGES = YAML.load_file("messages.yml")
 
+def messages(message, lang = "en")
+  MESSAGES[lang][message]
+end
+
 def prompt(message)
   puts("=> #{message}")
 end
