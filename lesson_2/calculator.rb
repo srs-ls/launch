@@ -2,24 +2,26 @@
 
 require "yaml"
 
+MESSAGES = YAML.load_file("messages.yml")
+
 def prompt(message)
-  prompts = YAML.safe_load(File.read("messages.yml"))
-
-  if message.is_a? Symbol
-    prompt_message = prompts.find { |p| p[message] }[message]
-  else
-    prompt_message = message
-  end
-
-  puts("=> #{prompt_message}")
+  puts("=> #{message}")
 end
 
 def operator_valid?(operator)
   %w(1 2 3 4).include?(operator)
 end
 
+def integer?(input)
+  /^-?\d+$/.match(input)
+end
+
+def float?(input)
+  /\d/.match(input) && /^-?\d*\.?\d*$/.match(input)
+end
+
 def number_valid?(number)
-  number.to_i != 0
+  integer?(number) || float?(number)
 end
 
 def operation_to_message(operator)
@@ -31,14 +33,14 @@ def operation_to_message(operator)
   }[operator]
 end
 
-puts prompt(:welcome)
+puts prompt(MESSAGES["welcome"])
 
 name = ""
 loop do
   name = gets.chomp
 
   if name.empty?
-    prompt(:valid_name)
+    prompt(MESSAGES["valid_name"])
   else
     break
   end
@@ -51,7 +53,7 @@ loop do
 
   loop do
     puts prompt("What's the first number?")
-    number1 = gets.chomp.to_f
+    number1 = gets.chomp
 
     if number_valid?(number1)
       break
@@ -64,7 +66,7 @@ loop do
 
   loop do
     puts prompt("What's the second number?")
-    number2 = gets.chomp.to_f
+    number2 = gets.chomp
 
     if number_valid?(number2)
       break
@@ -98,10 +100,10 @@ loop do
   sleep(1)
 
   result = case operator
-           when "1" then number1 + number2
-           when "2" then number1 * number2
-           when "3" then number1 - number2
-           when "4" then number1 / number2
+           when "1" then number1.to_f + number2.to_f
+           when "2" then number1.to_f * number2.to_f
+           when "3" then number1.to_f - number2.to_f
+           when "4" then number1.to_f / number2.to_f
            end
 
   prompt("The result id #{result}")

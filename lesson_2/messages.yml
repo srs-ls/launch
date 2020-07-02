@@ -1,3 +1,2 @@
---- # Messages for Calculator script
-- :welcome: "Welcome to the Calculator! Enter your name:"
-- :valid_name: Make sure you use a valid name.
+welcome: "Welcome to the Calculator! Enter your name:"
+valid_name: Make sure you use a valid name.
