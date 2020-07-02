@@ -37,14 +37,14 @@ def operation_to_message(operator)
   }[operator]
 end
 
-puts prompt(MESSAGES["welcome"])
+puts prompt(messages("welcome"))
 
 name = ""
 loop do
   name = gets.chomp
 
   if name.empty?
-    prompt(MESSAGES["valid_name"])
+    prompt(messages("valid_name"))
   else
     break
   end
