@@ -1,3 +1,5 @@
+# Assignment: RPS Bonus Features
+
 CHOICES = {
   rock: { beats: %w(scissors lizard), valid_choices: %w(r rock) },
   paper: { beats: %w(spock rock), valid_choices: %w(p paper) },
