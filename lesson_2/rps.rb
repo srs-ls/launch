@@ -45,4 +45,4 @@ loop do
   break unless answer.downcase.start_with?("y")
 end
 
-prompt("Thanks you for playing. Good bye!")
+prompt("Thank you for playing. Good bye!")
